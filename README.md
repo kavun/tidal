@@ -9,7 +9,7 @@ none
 ```js
 var tidal = new Tidal();
 ```
-Tidal is built so that you can create `new Tidal` instances each with their own event cache. Many other pub/sub libraries are implemented as singletons and thus only allow creation of instances by using some form of `Object.create`.
+Tidal is built so that you can create `new Tidal` instances each with their own event cache. Many other pub/sub libraries are implemented as singletons and thus only allow creation of instances by using some form of `Object.create` or `.extend()`.
 
 1. **`Tidal.prototype.subscribe('name', fn, [context])`**
 	```

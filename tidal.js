@@ -43,25 +43,26 @@ Tidal.prototype.subscribe = function (name, fn, context) {
  *		Tidal.publish('event.name',  1, 2, 'another argument' );
  */
 Tidal.prototype.publish = function (name) {
-	var cache = this._cache;
-	if (!cache.hasOwnProperty(name)) return;
+    var cache = this._cache;
+    if (!cache.hasOwnProperty(name))
+        return;
 
-	var handlers = cache[name];
-	var args = arguments.length > 2 ? Array.prototype.slice.call(arguments, 1) : arguments[1] || [];
-	var i = handlers.length;
-	var numArgs = args.length;
-	while (i--) {
-		var handler = handlers[i];
-		switch (numArgs) {
-			case 0: handler.fn.call(handler.ctx); break;
-			case 1: handler.fn.call(handler.ctx, args[0]); break;
-			case 2: handler.fn.call(handler.ctx, args[0], args[1]); break;
-			case 3: handler.fn.call(handler.ctx, args[0], args[1], args[2]); break;
-			default: handler.fn.apply(handler.ctx, args); break;
-		}
-	}
-
-	return this;
+    var handlers = cache[name];
+    var args = arguments.length > 2 ? Array.prototype.slice.call(arguments, 1) : arguments[1] || [];
+    if (Object.prototype.toString.call(args) !== '[object Array]') args = [args];
+    var numArgs = args.length;
+    for (var i = 0, l = handlers.length; i < l; i++) {
+        var handler = handlers[i];
+        switch (numArgs) {
+            case 0: handler.fn.call(handler.ctx); break;
+            case 1: handler.fn.call(handler.ctx, args[0]); break;
+            case 2: handler.fn.call(handler.ctx, args[0], args[1]); break;
+            case 3: handler.fn.call(handler.ctx, args[0], args[1], args[2]); break;
+            default: handler.fn.apply(handler.ctx, args); break;
+        }
+    }
+    
+    return this;
 }
 
 /**

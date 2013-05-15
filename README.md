@@ -25,7 +25,7 @@ Tidal is built so that you can create `new Tidal` instances each with their own 
 	```
 	
 	The context argument lessens the overhead of having to rely on other libraries to create proxy functions like `jQuery.proxy()` or `_.bind()`
-2. `Tidal.prototype.publish('name', ...)`
+2. **`Tidal.prototype.publish('name', ...)`**
 
 	```
 	@param {string} name - event name
@@ -41,12 +41,12 @@ Tidal is built so that you can create `new Tidal` instances each with their own 
 	```
 	
 	Optimized to use `Function.prototype.call` when less than 4 arguments are passed in. Inspired by [Backbone.js](http://backbonejs.org/docs/backbone.html#section-24)
-3. `Tidal.prototype.unsubscribe( token | ['name', fn] | 'eventname' | fn )`
+3. **`Tidal.prototype.unsubscribe( token | ['name', fn] | 'eventname' | fn )`**
 	Allows unsubscribing with:
 	- **token** - *will unsubscribe a single subscription*
 	
 		```js
-		tidal.unsubscribe(tokenOne); // 
+		tidal.unsubscribe(tokenOne);
 		```
 	- **handler** - *will unsubscribe any subscriptions with the passed in name and callback*
 	
@@ -54,7 +54,7 @@ Tidal is built so that you can create `new Tidal` instances each with their own 
 		var eventName = 'thebigevent';
 		var callback = function () {};
 		tidal.subscribe(eventName, callback);
-		todal.unsibscribe([eventName, callback]);
+		todal.unsubscribe([eventName, callback]);
 		```
 	- **event namespace** - *will unsubscribe any subscriptions for an event namespace*
 		```js
